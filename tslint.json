@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-console": {
+      "severity": "off"
+    },
+    "no-empty": false,
+    "prefer-const": true,
+    "only-arrow-functions": false,
+    "no-string-literal": false,
+    "no-shadowed-variable": false,
+    "no-unused-expression": false,
+    "no-empty-interface": false,
+    "ban-types": [
+      false,
+      [
+        "Function",
+        "Use a specific function type instead."
+      ]
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "@thatcompany/axios",
+  "version": "0.0.4",
+  "description": "Like edit Spring Controller, edit TypeScript class for Axios",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThatCoders/axios-enhancer"
+  },
+  "homepage": "https://axios-enhancer.docs.thatcoder.cn/",
+  "scripts": {
+    "test": "node lib/__test__/index.js",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "build": "tsc",
+    "build:check": "pnpm run lint && pnpm run format && pnpm run build",
+    "publish:npm": "npm publish --tag latest"
+  },
+  "keywords": [
+    "thatcoder",
+    "axios",
+    "axios-enhancer",
+    "typescript",
+    "decorators",
+    "GetMapping",
+    "PostMapping",
+    "PutMapping",
+    "DeleteMapping",
+    "RequestMapping",
+    "RequestParam"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "i": "^0.3.7",
+    "prettier": "^3.3.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.5.3"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "axios": "^1.7.2",
+    "reflect-metadata": "^0.2.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "tag": "latest"
+  }
+}
