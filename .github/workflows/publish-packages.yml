@@ -30,11 +30,12 @@ jobs:
         with:
           node-version: 21
           registry-url: https://npm.pkg.github.com/
+          scope: '@thatcompanys/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: echo "//npm.pkg.github.com/:_authToken=\${{ secrets.GIT_TOKEN }}" > .npmrc
-      - run: pnpm run publish:gpr
+      - run: echo "//npm.pkg.github.com/:_authToken=\${GIT_TOKEN}" > .npmrc
+      - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
@@ -47,11 +48,33 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21
+          registry-url: https://registry.npmjs.org/
+          scope: '@thatcompany/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > .npmrc
-      - run: pnpm run publish:npm
+      - run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" > .npmrc
+      - run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+  publish-that:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+          registry-url: https://registry.npmjs.org/
+          scope: 'that-axios'
+      - run: corepack enable
+      - run: pnpm install
+      - run: pnpm run build:check
+      - run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" > .npmrc
+      - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
