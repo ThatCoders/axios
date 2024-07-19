@@ -30,9 +30,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://npm.pkg.github.com
           scope: '@thatcompanys/axios'
       - run: corepack enable
+      - name: set scope
+        run:
+          apt-get install -y jq
+          jq --arg name "@thatcompanys/axios" '.name = $name' package.json > package.json.new
+          mv package.json.new package.json
+          jq --arg registry "https://npm.pkg.github.com" '.publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
       - run: rm -f .npmrc
@@ -56,12 +63,43 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org
           scope: '@thatcompany/axios'
       - run: corepack enable
+      - name: set scope
+        run:
+          apt-get install -y jq
+          jq --arg name "@thatcompany/axios" '.name = $name' package.json > package.json.new
+          mv package.json.new package.json
+          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
-      - run: npm publish --tag latest
-      - run: npm publish --tag latest --scope that-axios
+      - run: pnpm run publish:npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-that:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+          registry-url: https://registry.npmjs.org
+          scope: 'that-axios'
+      - run: corepack enable
+      - name: set scope
+        run:
+          apt-get install -y jq
+          jq --arg name "that-axios" '.name = $name' package.json > package.json.new
+          mv package.json.new package.json
+          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
+      - run: pnpm install
+      - run: pnpm run build:check
+      - run: pnpm run publish:that
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

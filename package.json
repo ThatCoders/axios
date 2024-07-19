@@ -15,8 +15,9 @@
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "build:check": "pnpm run lint && pnpm run format && pnpm run build",
-    "publish:npm": "npm publish --tag latest && npm publish --tag next --access public --scope that-axios",
-    "publish:gpr": "npm publish --tag latest --access public --scope @thatcompanys/axios"
+    "publish:npm": "npm publish --tag latest",
+    "publish:that": "npm publish --tag next --access public --scope that-axios",
+    "publish:gpr": "npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcompanys/axios"
   },
   "keywords": [
     "thatcoder",
@@ -52,6 +53,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "tag": "latest"
+    "tag": "latest",
+    "registry": "https://registry.npmjs.org/"
   }
 }
