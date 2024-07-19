@@ -37,9 +37,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-          jq --arg name "@thatcoders/axios" --arg registry "https://npm.pkg.github.com" '
+          jq --arg name "@thatcoders/axios" --arg ry "https://npm.pkg.github.com" '
             .name = $name |
-            .publishConfig.registry = $registry' package.json > package.json.new
+            .publishConfig.registry = $ry' package.json > package.json.new
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
@@ -47,10 +47,43 @@ jobs:
       - name: Create .npmrc for GitHub Packages
         run:
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-          @thatcoders/axios=https://npm.pkg.github.com/
+          @thatcoders:axios=https://npm.pkg.github.com/
           always-auth=true" > .npmrc
       - run: cat .npmrc
       - run: pnpm run publish:gpr
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+  publish-gpr-org:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+          registry-url: https://npm.pkg.github.com
+          scope: '@thatcompanys/axios'
+      - run: corepack enable
+      - name: set scope
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          jq --arg name "@thatcompanys/axios" --arg ry "https://npm.pkg.github.com" '
+            .name = $name |
+            .publishConfig.registry = $ry' package.json > package.json.new
+          mv package.json.new package.json
+      - run: pnpm install
+      - run: pnpm run build:check
+      - run: rm -f .npmrc
+      - name: Create .npmrc for GitHub Packages
+        run:
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+          @thatcompanys:axios=https://npm.pkg.github.com/
+          always-auth=true" > .npmrc
+      - run: cat .npmrc
+      - run: npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcompanys/axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
