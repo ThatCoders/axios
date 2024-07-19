@@ -20,23 +20,22 @@ jobs:
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 21
         uses: actions/setup-node@v3
         with:
           node-version: 21
-          registry-url: https://npm.pkg.github.com/
-          scope: '@thatcompanys/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
+      - run: rm -f .npmrc
+      - name: Create .npmrc for GitHub Packages
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n@thatcompany:registry=https://npm.pkg.github.com/\nalways-auth=true" > .npmrc
       - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+
 
   publish-npm:
     needs: build
