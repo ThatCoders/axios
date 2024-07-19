@@ -26,12 +26,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21
+          registry-url: https://npm.pkg.github.com/
+          scope: '@thatcompanys/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
       - run: rm -f .npmrc
       - name: Create .npmrc for GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n@thatcompanys:axios=https://npm.pkg.github.com/\nalways-auth=true" > .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}$'\n'@thatcompanys:axios=https://npm.pkg.github.com/$'\n'always-auth=true" > .npmrc
+      - run: cat .npmrc
       - run: npm publish --tag latest --scope @thatcompanys/axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -47,11 +50,11 @@ jobs:
         with:
           node-version: 21
           registry-url: https://registry.npmjs.org/
-          scope: '@thatcompany/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: npm publish --tag latest --scope @thatcompany/axios
+      - run: cat .npmrc
+      - run: npm publish --tag latest
       - run: npm publish --tag latest --scope that-axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
