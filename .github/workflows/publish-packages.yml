@@ -31,8 +31,8 @@ jobs:
       - run: pnpm run build:check
       - run: rm -f .npmrc
       - name: Create .npmrc for GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n@thatcompany:registry=https://npm.pkg.github.com/\nalways-auth=true" > .npmrc
-      - run: npm publish --tag latest
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n@thatcompanys:axios=https://npm.pkg.github.com/\nalways-auth=true" > .npmrc
+      - run: npm publish --tag latest --scope @thatcompanys/axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
@@ -51,26 +51,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: npm publish --tag latest
+      - run: npm publish --tag latest --scope @thatcompany/axios
+      - run: npm publish --tag latest --scope that-axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-
-  publish-that:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 21
-        uses: actions/setup-node@v3
-        with:
-          node-version: 21
-          registry-url: https://registry.npmjs.org/
-          scope: 'that-axios'
-      - run: corepack enable
-      - run: pnpm install
-      - run: pnpm run build:check
-      - run: npm publish --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
