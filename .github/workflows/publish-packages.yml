@@ -38,8 +38,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
           jq --arg name "@thatcompanys/axios" --arg registry "https://npm.pkg.github.com" '
-          .name = $name |
-          .publishConfig.registry = $registry' package.json > package.json.new
+            .name = $name |
+            .publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
       - run: rm -f .npmrc
@@ -71,8 +72,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
           jq --arg name "@thatcompany/axios" --arg registry "https://registry.npmjs.org" '
-          .name = $name |
-          .publishConfig.registry = $registry' package.json > package.json.new
+            .name = $name |
+            .publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
       - run: pnpm run publish:npm
@@ -96,8 +98,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
           jq --arg name "that-axios" --arg registry "https://registry.npmjs.org" '
-          .name = $name |
-          .publishConfig.registry = $registry' package.json > package.json.new
+            .name = $name |
+            .publishConfig.registry = $registry' package.json > package.json.new
+          mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
       - run: pnpm run publish:that
