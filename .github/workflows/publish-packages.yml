@@ -2,9 +2,9 @@ name: Publish Package
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
   release:
     types: [created]
 
@@ -37,12 +37,12 @@ jobs:
       - run: pnpm run build:check
       - run: rm -f .npmrc
       - name: Create .npmrc for GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\
-          @thatcompanys:axios=https://npm.pkg.github.com/\
+        run:
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+          @thatcompanys:axios=https://npm.pkg.github.com/
           always-auth=true" > .npmrc
       - run: cat .npmrc
-      - run: npm publish --tag latest --scope @thatcompanys/axios
+      - run: npm publish --scope @thatcompanys/axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
@@ -57,6 +57,7 @@ jobs:
         with:
           node-version: 21
           registry-url: https://registry.npmjs.org/
+          scope: '@thatcompany/axios'
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
