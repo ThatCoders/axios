@@ -1,12 +1,12 @@
 {
   "name": "@thatcompany/axios",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "像Spring一样编写前端请求。Like edit Spring Controller, edit TypeScript class for Axios",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThatCoders/axios-enhancer"
+    "url": "https://github.com/ThatCoders/axios"
   },
   "homepage": "https://axios-enhancer.docs.thatcoder.cn/",
   "scripts": {
@@ -17,7 +17,7 @@
     "build:check": "pnpm run lint && pnpm run format && pnpm run build",
     "publish:npm": "npm publish --tag latest",
     "publish:that": "npm publish --tag next --access public --scope that-axios",
-    "publish:gpr": "npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcompanys/axios"
+    "publish:gpr": "npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcoders/axios"
   },
   "keywords": [
     "thatcoder",
