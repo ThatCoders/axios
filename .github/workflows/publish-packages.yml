@@ -35,10 +35,11 @@ jobs:
       - run: corepack enable
       - name: set scope
         run:
-          apt-get install -y jq
-          jq --arg name "@thatcompanys/axios" '.name = $name' package.json > package.json.new
-          mv package.json.new package.json
-          jq --arg registry "https://npm.pkg.github.com" '.publishConfig.registry = $registry' package.json > package.json.new
+          cd /home/runner/work/_temp/ &&
+          apt-get install -y jq &&
+          jq --arg name "@thatcompanys/axios" '.name = $name' package.json > package.json.new &&
+          mv package.json.new package.json &&
+          jq --arg registry "https://npm.pkg.github.com" '.publishConfig.registry = $registry' package.json > package.json.new &&
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
@@ -68,10 +69,11 @@ jobs:
       - run: corepack enable
       - name: set scope
         run:
-          apt-get install -y jq
-          jq --arg name "@thatcompany/axios" '.name = $name' package.json > package.json.new
-          mv package.json.new package.json
-          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new
+          cd /home/runner/work/_temp/ &&
+          apt-get install -y jq &&
+          jq --arg name "@thatcompany/axios" '.name = $name' package.json > package.json.new &&
+          mv package.json.new package.json &&
+          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new &&
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
@@ -93,10 +95,11 @@ jobs:
       - run: corepack enable
       - name: set scope
         run:
-          apt-get install -y jq
-          jq --arg name "that-axios" '.name = $name' package.json > package.json.new
-          mv package.json.new package.json
-          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new
+          cd /home/runner/work/_temp/ &&
+          apt-get install -y jq &&
+          jq --arg name "that-axios" '.name = $name' package.json > package.json.new &&
+          mv package.json.new package.json &&
+          jq --arg registry "https://registry.npmjs.org" '.publishConfig.registry = $registry' package.json > package.json.new &&
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
