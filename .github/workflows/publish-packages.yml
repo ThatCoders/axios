@@ -34,7 +34,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: echo "//npm.pkg.github.com/:_authToken=\${GIT_TOKEN}" > .npmrc
+      - run: npm ci
       - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -53,7 +53,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" > .npmrc
+      - run: npm ci
       - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -73,7 +73,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
-      - run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" > .npmrc
+      - run: npm ci
       - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
