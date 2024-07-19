@@ -50,7 +50,7 @@ jobs:
           @thatcoders/axios=https://npm.pkg.github.com/
           always-auth=true" > .npmrc
       - run: cat .npmrc
-      - run: npm publish --scope @thatcompanys/axios
+      - run: pnpm run publish:gpr
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
