@@ -33,6 +33,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
+      - run: echo "//npm.pkg.github.com/:_authToken=\${{ secrets.GIT_TOKEN }}" > .npmrc
       - run: pnpm run publish:gpr
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -49,6 +50,8 @@ jobs:
       - run: corepack enable
       - run: pnpm install
       - run: pnpm run build:check
+      - run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > .npmrc
       - run: pnpm run publish:npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
