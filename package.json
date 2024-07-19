@@ -1,6 +1,6 @@
 {
   "name": "@thatcompany/axios",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "像Spring一样编写前端请求。Like edit Spring Controller, edit TypeScript class for Axios",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
