@@ -1,6 +1,6 @@
-import {ILogService} from '../ILogService';
-import {DATA_LOG_LEVEL} from '../../data';
-import {TAxiosRequestConfig as AxiosRequestConfig, ThatAxiosResponse, TLogLevel, TLogRequest} from '../../type';
+import { ILogService } from '../ILogService';
+import { DATA_LOG_LEVEL } from '../../data';
+import { TAxiosRequestConfig as AxiosRequestConfig, ThatAxiosResponse, TLogLevel, TLogRequest } from '../../type';
 
 /**
  * E 日志服务实现
@@ -48,7 +48,7 @@ export default class LogService implements ILogService {
             url: axiosConfig.url,
             method: axiosConfig.method,
             params: axiosConfig.data,
-            time: new Date().toLocaleString('zh-CN', {hour12: false}),
+            time: new Date().toLocaleString('zh-CN', { hour12: false }),
         };
         // @ts-ignore
         this.group(axiosConfig.requestLog.func + ' 日志组');

@@ -1,6 +1,6 @@
-import {BaseMapper} from './BaseMapper';
-import {DeleteMapping, GetMapping, PostMapping, PutMapping} from '../decorator';
-import {ThatAxiosResponse} from '../type';
+import { BaseMapper } from './BaseMapper';
+import { DeleteMapping, GetMapping, PostMapping, PutMapping } from '../decorator';
+import { ThatAxiosResponse } from '../type';
 
 /**
  * RestFulMapper RestFul风格的Mapper基类

@@ -1,7 +1,7 @@
 {
   "name": "@thatcompany/axios",
-  "version": "0.0.4",
-  "description": "Like edit Spring Controller, edit TypeScript class for Axios",
+  "version": "0.0.6",
+  "description": "像Spring一样编写前端请求。Like edit Spring Controller, edit TypeScript class for Axios",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
@@ -15,7 +15,8 @@
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "build:check": "pnpm run lint && pnpm run format && pnpm run build",
-    "publish:npm": "npm publish --tag latest"
+    "publish:npm": "npm publish --tag latest && npm publish --tag next --access public --scope that-axios",
+    "publish:gpr": "npm publish --tag latest --access public --scope @thatcompanys/axios"
   },
   "keywords": [
     "thatcoder",
@@ -42,7 +43,8 @@
   },
   "files": [
     "lib/**/*",
-    "README.md"
+    "README.md",
+    "!lib/__test__"
   ],
   "dependencies": {
     "axios": "^1.7.2",

@@ -1,5 +1,5 @@
-import {AxiosRequestConfig, Method} from 'axios';
-import {TLogRequest} from './service/TLogService';
+import { AxiosRequestConfig, Method } from 'axios';
+import { TLogRequest } from './service/TLogService';
 
 /**
  * 自定义 AxiosRequestConfig 接口

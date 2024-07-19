@@ -1,5 +1,5 @@
-import {INotifyService} from '../INotifyService';
-import {axiosEnhancer} from '../../config';
+import { INotifyService } from '../INotifyService';
+import { axiosEnhancer } from '../../config';
 
 /**
  * E 通知服务实现
@@ -28,13 +28,13 @@ export default class NotifyService implements INotifyService {
     loading?(message: string): string {
         const key = Date.now().toString() + Math.random().toString().slice(2);
         axiosEnhancer.logger.info('NotifyService: loading');
-        axiosEnhancer.logger.table({message, key});
+        axiosEnhancer.logger.table({ message, key });
         return key;
     }
 
     close?(message: string, key: string, isSuccess: boolean): void {
         axiosEnhancer.logger.info('NotifyService: close');
-        const msg = {message, key, isSuccess};
+        const msg = { message, key, isSuccess };
         isSuccess ? axiosEnhancer.logger.table(msg) : axiosEnhancer.logger.error(JSON.stringify(msg));
     }
 

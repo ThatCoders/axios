@@ -1,8 +1,8 @@
-import {TAxiosRequestConfig} from '../type';
+import { TAxiosRequestConfig } from '../type';
 import 'reflect-metadata';
 import axios from 'axios';
-import {axiosEnhancer} from '../config';
-import {DATA_META_KEY} from '../data';
+import { axiosEnhancer } from '../config';
+import { DATA_META_KEY } from '../data';
 
 /**
  * <h3>AXIOS 增强型装饰器。构建请求队列，防止重复请求。</h3>
@@ -21,8 +21,8 @@ function RequestQueue(target: any, propertyKey: string, descriptor: PropertyDesc
 
         // 获取请求队列的key
         const getPendingKey = (config: TAxiosRequestConfig): string => {
-            let {params, data} = config;
-            const {url, method} = config;
+            let { params, data } = config;
+            const { url, method } = config;
             if (params) params = JSON.stringify(params);
             if (typeof data === 'string') data = JSON.parse(data);
             return [url, method, JSON.stringify(params), JSON.stringify(data)].join('&');
@@ -95,4 +95,4 @@ function RequestInterceptor(target: any, propertyKey: string, descriptor: Proper
     return descriptor;
 }
 
-export {RequestQueue, RequestSecurity, RequestInterceptor};
+export { RequestQueue, RequestSecurity, RequestInterceptor };

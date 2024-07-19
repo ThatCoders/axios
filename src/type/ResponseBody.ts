@@ -21,4 +21,4 @@ enum ResponseStatus {
     ERROR = 500,
 }
 
-export {ResponseBody, ThatAxiosResponse, ResponseStatus};
+export { ResponseBody, ThatAxiosResponse, ResponseStatus };

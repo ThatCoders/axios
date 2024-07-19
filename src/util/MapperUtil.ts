@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import {DATA_META_KEY} from '../data';
-import {JSONObject} from '../type';
+import { DATA_META_KEY } from '../data';
+import { JSONObject } from '../type';
 
 /**
  * 获取方法的参数名和默认值
@@ -31,7 +31,7 @@ function getParams(target: any, propertyKey: string): { defaultParams: { [key: s
         }
         params.push(key);
     });
-    return {params, defaultParams};
+    return { params, defaultParams };
 }
 
 /**

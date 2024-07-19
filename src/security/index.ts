@@ -1,4 +1,4 @@
-import {ITokenSecurity} from './impl/ITokenSecurity';
+import { ITokenSecurity } from './impl/ITokenSecurity';
 
 export const tokenSecurity: ITokenSecurity = new ITokenSecurity('this_is_a_jwt_secret', 'Authorization', 'Bearer ', [
     '/login',

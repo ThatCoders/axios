@@ -1,7 +1,7 @@
-import {filer, FileService, logger, LogService, notify, NotifyService, router, RouterService} from '../service';
+import { filer, FileService, logger, LogService, notify, NotifyService, router, RouterService } from '../service';
 import AxiosEnhancer from './AxiosEnhancer';
-import {ITokenSecurity, Security, tokenSecurity} from '../security';
-import {TAxiosEnhancer} from '../type';
+import { ITokenSecurity, Security, tokenSecurity } from '../security';
+import { TAxiosEnhancer } from '../type';
 
 const axiosEnhancer: TAxiosEnhancer = new AxiosEnhancer(
     logger as LogService,
@@ -13,4 +13,4 @@ const axiosEnhancer: TAxiosEnhancer = new AxiosEnhancer(
 
 axiosEnhancer.start();
 
-export {axiosEnhancer};
+export { axiosEnhancer };

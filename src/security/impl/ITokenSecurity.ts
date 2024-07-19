@@ -1,6 +1,6 @@
-import {SecurityEntity} from '../SercurityEntity'; // import SecurityEntity from '../../index因为有依赖关系，所以不能直接导入，需要通过相对路径导入';
-import {TAxiosRequestConfig} from '../../type';
-import {axiosEnhancer} from '../../config';
+import { SecurityEntity } from '../SercurityEntity'; // import SecurityEntity from '../../index因为有依赖关系，所以不能直接导入，需要通过相对路径导入';
+import { TAxiosRequestConfig } from '../../type';
+import { axiosEnhancer } from '../../config';
 
 export class ITokenSecurity extends SecurityEntity {
     enabled: boolean = false;

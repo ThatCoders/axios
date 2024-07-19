@@ -1,4 +1,4 @@
-import {TAxiosRequestConfig as AxiosRequestConfig} from '../type/AxiosRequestConfig';
+import { TAxiosRequestConfig as AxiosRequestConfig } from '../type/AxiosRequestConfig';
 
 export interface Security {
     /**

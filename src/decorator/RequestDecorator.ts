@@ -1,7 +1,7 @@
-import {JSONObject} from '../type';
-import {DATA_META_KEY} from '../data';
-import {ResponseType as AxiosResponseType} from 'axios';
-import {axiosEnhancer} from '../config';
+import { JSONObject } from '../type';
+import { DATA_META_KEY } from '../data';
+import { ResponseType as AxiosResponseType } from 'axios';
+import { axiosEnhancer } from '../config';
 
 /**
  * <h3>REQUEST 功能型装饰器：放弃加入请求队列。</h3>

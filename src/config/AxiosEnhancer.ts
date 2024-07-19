@@ -1,6 +1,6 @@
-import {TAxiosEnhancer, TLogLevel} from '../type';
-import {FileService, IFileService, LogService, NotifyService, RouterService} from '../service';
-import {Security} from '../security';
+import { TAxiosEnhancer, TLogLevel } from '../type';
+import { FileService, IFileService, LogService, NotifyService, RouterService } from '../service';
+import { Security } from '../security';
 
 /**
  * 全局配置

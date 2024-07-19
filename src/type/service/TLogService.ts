@@ -1,5 +1,5 @@
-import {ThatAxiosResponse} from '../ResponseBody';
-import {TAxiosRequestConfig} from '../AxiosRequestConfig';
+import { ThatAxiosResponse } from '../ResponseBody';
+import { TAxiosRequestConfig } from '../AxiosRequestConfig';
 
 /**
  * T 日志级别类型

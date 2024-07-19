@@ -13,6 +13,7 @@
     "sourceMap": true,
     "declaration": true,
     "outDir": "./lib",
+    "rootDir": "./src",
     "lib": [
       "ES2023",
       "dom"
@@ -29,7 +30,7 @@
   ],
   "exclude": [
     "node_modules",
-    "**/__tests__/*"
+    "src/__tests__"
   ],
   "rulesDirectory": [
     "./node_modules/@typescript-eslint/eslint-plugin/dist/rules"

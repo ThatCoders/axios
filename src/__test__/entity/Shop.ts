@@ -1,4 +1,4 @@
-import {Column, Entity, Id} from '../../decorator';
+import { Column, Entity, Id } from '../../decorator';
 
 @Entity
 export class Shop {

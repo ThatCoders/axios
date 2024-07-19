@@ -1,4 +1,4 @@
-import {TLogLevel} from 'src/type/service/TLogService';
+import { TLogLevel } from 'src/type/service/TLogService';
 
 /**
  * D 日志级别数据

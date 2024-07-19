@@ -1,8 +1,8 @@
-import {INotifyService, IRouterService} from '../service';
+import { INotifyService, IRouterService } from '../service';
 import ILogService from '../service/impl/LogService';
-import {Security} from '../security';
+import { Security } from '../security';
 import IFileService from '../service/IFileService';
-import {TLogLevel} from './service/TLogService';
+import { TLogLevel } from './service/TLogService';
 
 export type TAxiosEnhancer = {
     /**

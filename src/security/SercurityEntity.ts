@@ -1,5 +1,5 @@
-import {Security} from './Security';
-import {TAxiosRequestConfig} from '../type';
+import { Security } from './Security';
+import { TAxiosRequestConfig } from '../type';
 
 export class SecurityEntity implements Security {
     permit: string[] = ['/login', '/proxy/service/common/**'];
@@ -30,6 +30,5 @@ export class SecurityEntity implements Security {
         return requestConfig;
     }
 
-    setEnable(enable: boolean): void {
-    }
+    setEnable(enable: boolean): void {}
 }

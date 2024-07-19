@@ -1,8 +1,8 @@
-import axios, {AxiosResponse} from 'axios';
-import {ResponseBody, ResponseStatus, TAxiosRequestConfig, ThatAxiosResponse} from '../type';
-import {RequestQueue, RequestSecurity} from '../decorator/AxiosDecorator';
-import {axiosEnhancer} from '../config';
-import {INotifyService} from '../service';
+import axios, { AxiosResponse } from 'axios';
+import { ResponseBody, ResponseStatus, TAxiosRequestConfig, ThatAxiosResponse } from '../type';
+import { RequestQueue, RequestSecurity } from '../decorator/AxiosDecorator';
+import { axiosEnhancer } from '../config';
+import { INotifyService } from '../service';
 
 const notifyService: INotifyService = axiosEnhancer.notify;
 /**
@@ -68,7 +68,7 @@ export default class ThatAxios {
 
         let RESULT = false;
 
-        let BODY: ResponseBody = {msg: '', result: false, code: 500};
+        let BODY: ResponseBody = { msg: '', result: false, code: 500 };
 
         BODY = await this.myAxios(axiosConfig, {
             repeat_request_cancel: axiosConfig.queue || false,
@@ -101,7 +101,7 @@ export default class ThatAxios {
             BODY.result = true;
             if (BODY?.rows?.length === 0) {
                 notifyService.warn('相关条件未查询到数据');
-                return {RESULT, BODY};
+                return { RESULT, BODY };
             }
             notifyService.success(BODY.msg);
         } else if (!RESULT && BODY?.code === ResponseStatus.UNAUTHORIZED) {
@@ -109,7 +109,7 @@ export default class ThatAxios {
         } else {
             notifyService.error(BODY.msg);
         }
-        axiosEnhancer.logger.end(axiosConfig, {RESULT, BODY});
-        return {RESULT, BODY};
+        axiosEnhancer.logger.end(axiosConfig, { RESULT, BODY });
+        return { RESULT, BODY };
     }
 }

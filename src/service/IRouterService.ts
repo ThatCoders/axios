@@ -1,4 +1,3 @@
-import {TRouterService} from '../type';
+import { TRouterService } from '../type';
 
-export interface IRouterService extends TRouterService {
-}
+export interface IRouterService extends TRouterService {}

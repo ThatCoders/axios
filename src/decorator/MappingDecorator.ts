@@ -1,7 +1,7 @@
-import {DATA_META_KEY} from '../data';
-import {Method} from 'axios';
+import { DATA_META_KEY } from '../data';
+import { Method } from 'axios';
 import MapperUtil from '../util/MapperUtil';
-import {TAxiosRequestConfig, ThatAxiosResponse} from '../type';
+import { TAxiosRequestConfig, ThatAxiosResponse } from '../type';
 import ThatAxios from '../requestor/ThatAxios';
 
 /**
@@ -65,9 +65,9 @@ function BuildMappingDecorator(
                         };
                     } else if (typeof args === 'object') {
                         // @ts-ignore
-                        data = {...data, ...args};
+                        data = { ...data, ...args };
                     } else {
-                        data = {...data, ...{[paramNames[0]]: args}};
+                        data = { ...data, ...{ [paramNames[0]]: args } };
                     }
                 }
                 return data;
@@ -193,4 +193,4 @@ function DeleteMapping(value: string = '', queue: boolean = false, permit: boole
 
 // CustomMapping
 
-export {GetMapping, PostMapping, PutMapping, DeleteMapping};
+export { GetMapping, PostMapping, PutMapping, DeleteMapping };

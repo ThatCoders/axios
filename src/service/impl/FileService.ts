@@ -1,6 +1,6 @@
 import IFileService from '../IFileService';
-import {TAxiosRequestConfig} from '../../type';
-import {AxiosResponse} from 'axios';
+import { TAxiosRequestConfig } from '../../type';
+import { AxiosResponse } from 'axios';
 
 export default class FileService implements IFileService {
     enable: boolean = false;

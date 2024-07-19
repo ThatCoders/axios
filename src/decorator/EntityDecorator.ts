@@ -1,5 +1,5 @@
-import {DATA_META_KEY} from '../data';
-import {ThatAxiosResponse} from '../type';
+import { DATA_META_KEY } from '../data';
+import { ThatAxiosResponse } from '../type';
 import 'reflect-metadata';
 
 /**
@@ -51,7 +51,7 @@ function Column(target: any, propertyKey: string | symbol) {
     // 获取字段类型
     const type = Reflect.getMetadata('design:type', target, propertyKey);
     // 将字段及其类型加入列元数据
-    columns.push({name: propertyKey, type});
+    columns.push({ name: propertyKey, type });
     Reflect.defineMetadata(DATA_META_KEY.ENTITY_COLUMN, columns, target.constructor);
 }
 
@@ -90,11 +90,11 @@ function GenerateFindMethods(entity: any) {
             target.prototype[methodName] = async function (
                 value: typeof column.type,
             ): Promise<ThatAxiosResponse<typeof entity>> {
-                return await target.prototype.findAll({[column.name]: value});
+                return await target.prototype.findAll({ [column.name]: value });
             };
         });
         return target;
     };
 }
 
-export {Entity, Column, Id, GenerateFindMethods};
+export { Entity, Column, Id, GenerateFindMethods };

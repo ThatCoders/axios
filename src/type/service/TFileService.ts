@@ -1,5 +1,5 @@
-import {TAxiosRequestConfig as AxiosRequestConfig} from '../AxiosRequestConfig';
-import {AxiosResponse} from 'axios';
+import { TAxiosRequestConfig as AxiosRequestConfig } from '../AxiosRequestConfig';
+import { AxiosResponse } from 'axios';
 
 /**
  * T 文件服务类型定义
