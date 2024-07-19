@@ -37,7 +37,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-          jq --arg name "@thatcompanys/axios" --arg registry "https://npm.pkg.github.com" '
+          jq --arg name "@thatcoders/axios" --arg registry "https://npm.pkg.github.com" '
             .name = $name |
             .publishConfig.registry = $registry' package.json > package.json.new
           mv package.json.new package.json
@@ -47,7 +47,7 @@ jobs:
       - name: Create .npmrc for GitHub Packages
         run:
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-          @thatcompanys:axios=https://npm.pkg.github.com/
+          @thatcoders/axios=https://npm.pkg.github.com/
           always-auth=true" > .npmrc
       - run: cat .npmrc
       - run: npm publish --scope @thatcompanys/axios
