@@ -43,7 +43,6 @@ jobs:
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
-      - run: cat .npmrc
       - run: pnpm run publish:gpr
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -70,7 +69,6 @@ jobs:
           mv package.json.new package.json
       - run: pnpm install
       - run: pnpm run build:check
-      - run: cat .npmrc
       - run: npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcompanys/axios
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
