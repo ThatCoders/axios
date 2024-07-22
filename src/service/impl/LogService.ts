@@ -62,7 +62,7 @@ export default class LogService implements ILogService {
             return;
         }
         this.info('响应数据源');
-        this.table(response.BODY);
+        this.table(response.DATA);
         // @ts-ignore
         this.trace(axiosConfig.requestLog.func + ' 堆栈');
         // this.profile(axiosConfig.requestLog.func + ' 性能', true);

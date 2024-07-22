@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
-import { ResponseBody, ResponseStatus, TAxiosRequestConfig, ThatAxiosResponse } from '../type';
+import { TAxiosRequestConfig, ThatAxiosResponse, ThatStatus } from '../type';
 import { RequestQueue, RequestSecurity } from '../decorator/AxiosDecorator';
 import { axiosEnhancer } from '../config';
 import { INotifyService } from '../service';
+import { DATA_RESPONSE_STATUS } from '../data';
 
 const notifyService: INotifyService = axiosEnhancer.notify;
 /**
@@ -66,11 +67,11 @@ export default class ThatAxios {
     public async request(axiosConfig: TAxiosRequestConfig): Promise<ThatAxiosResponse> {
         axiosEnhancer.logger.start(axiosConfig);
 
-        let RESULT = false;
+        let STATUS: ThatStatus = new ThatStatus(DATA_RESPONSE_STATUS.OK);
 
-        let BODY: ResponseBody = { msg: '', result: false, code: 500 };
+        let DATA: any = {};
 
-        BODY = await this.myAxios(axiosConfig, {
+        DATA = await this.myAxios(axiosConfig, {
             repeat_request_cancel: axiosConfig.queue || false,
         })
             .then((res: AxiosResponse) => {
@@ -78,38 +79,34 @@ export default class ThatAxios {
                     const blob = new Blob([res.data]);
                     const filename =
                         decodeURIComponent(decodeURIComponent(res.headers['download-filename'])) || '未闻文件名';
-                    BODY.msg = `下载成功 文件名：${filename}`.trim();
-                    BODY.result = true;
-                    BODY.code = 200;
-                    RESULT = true;
+                    DATA.msg = `下载成功 文件名：${filename}`.trim();
+                    STATUS = new ThatStatus(DATA_RESPONSE_STATUS.OK);
                     axiosEnhancer.filer.enable && axiosEnhancer.filer.saveBlob(blob, filename);
-                    axiosEnhancer.filer.enable || (BODY.data = blob);
-                    return BODY;
+                    axiosEnhancer.filer.enable || (DATA.data = blob);
+                    return DATA;
                 }
-                RESULT = res?.data?.code === 200;
-                if (RESULT || (!RESULT && res?.data?.status === ResponseStatus.UNAUTHORIZED)) {
-                    return res.data;
-                }
-                BODY.msg = '服务器无响应体';
-                return BODY;
+                STATUS = new ThatStatus(res.status);
+                DATA = res?.data;
+                return DATA;
             })
             .catch((error) => {
-                BODY.msg = error.response.data.message;
-                return BODY;
+                DATA.msg = error.response.data.message;
+                return DATA;
             });
-        if (RESULT) {
-            BODY.result = true;
-            if (BODY?.rows?.length === 0) {
+        if (STATUS.code === DATA_RESPONSE_STATUS.OK) {
+            if (DATA?.rows?.length === 0 || DATA?.length === 0 || DATA?.total === 0) {
                 notifyService.warn('相关条件未查询到数据');
-                return { RESULT, BODY };
+                return { STATUS, DATA };
             }
-            notifyService.success(BODY.msg);
-        } else if (!RESULT && BODY?.code === ResponseStatus.UNAUTHORIZED) {
-            notifyService.warn(BODY.msg);
+            notifyService.success(DATA?.msg || DATA?.message || '请求成功');
         } else {
-            notifyService.error(BODY.msg);
+            if (STATUS.code === DATA_RESPONSE_STATUS.UNAUTHORIZED) {
+                notifyService.warn(DATA?.msg || DATA?.message || STATUS.message || '请求失败，请检查登录状态');
+            } else {
+                notifyService.error(DATA?.msg || DATA?.message || STATUS.message || '请求失败，请稍后再试');
+            }
         }
-        axiosEnhancer.logger.end(axiosConfig, { RESULT, BODY });
-        return { RESULT, BODY };
+        axiosEnhancer.logger.end(axiosConfig, { STATUS, DATA });
+        return { STATUS, DATA };
     }
 }

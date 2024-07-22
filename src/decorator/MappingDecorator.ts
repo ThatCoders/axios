@@ -40,16 +40,13 @@ function BuildMappingDecorator(
                 if (args.length === 1 && typeof args[0] === 'object') {
                     args = args[0];
                 }
-                if (method === 'POST' || method === 'PUT') {
-                    if (
-                        requestHeaders.hasOwnProperty('Content-Type') &&
-                        requestHeaders['Content-Type'] === 'multipart/form-data'
-                    ) {
-                        data = new FormData();
-                        data.append('file', args);
-                    } else {
-                        data = args;
-                    }
+                // // 处理文件上传
+                if (
+                    requestHeaders.hasOwnProperty('Content-Type') &&
+                    requestHeaders['Content-Type'] === 'multipart/form-data'
+                ) {
+                    data = new FormData();
+                    data.append('file', args);
                 } else {
                     data = {
                         ...param.defaultParams,
@@ -79,7 +76,8 @@ function BuildMappingDecorator(
                 method,
                 safety,
                 url: target.base + newPath,
-                [method === 'GET' || method === 'DELETE' ? 'params' : 'data']: data,
+                data,
+                params: data,
                 headers: requestHeaders,
                 responseType,
                 queue: RequestQueue,
