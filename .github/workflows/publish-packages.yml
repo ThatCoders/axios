@@ -80,13 +80,13 @@ jobs:
         with:
           node-version: 21
           registry-url: https://registry.npmjs.org
-          scope: '@thatcompany/axios'
+          scope: '@thatcdn/axios'
       - run: corepack enable
       - name: set scope
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-          jq --arg name "@thatcompany/axios" --arg registry "https://registry.npmjs.org" '
+          jq --arg name "@thatcdn/axios" --arg registry "https://registry.npmjs.org" '
             .name = $name |
             .publishConfig.registry = $registry' package.json > package.json.new
           mv package.json.new package.json
