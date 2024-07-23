@@ -1,5 +1,5 @@
 {
-  "name": "@thatcompany/axios",
+  "name": "@thatcdn/axios",
   "version": "1.1.1",
   "description": "像Spring一样编写前端请求。Like edit Spring Controller, edit TypeScript class for Axios",
   "main": "lib/index.js",
@@ -15,7 +15,7 @@
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "build:check": "pnpm run lint && pnpm run format && pnpm run build",
-    "publish:npm": "npm publish --tag latest",
+    "publish:npm": "npm publish --tag next --access public --scope @thatcdn/axios",
     "publish:that": "npm publish --tag next --access public --scope that-axios",
     "publish:gpr": "npm publish --tag latest --registry https://npm.pkg.github.com --access public --scope @thatcoders/axios"
   },
