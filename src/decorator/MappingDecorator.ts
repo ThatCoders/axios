@@ -70,6 +70,9 @@ function BuildMappingDecorator(
                 return data;
             };
             let newPath = value; // 直接修改value会改变方法元数据
+            if (!newPath.startsWith('/')){
+                newPath = `/${newPath}`;
+            }
             const data = requestData();
             newPath = MapperUtil.matchPath(newPath, data);
             const config: TAxiosRequestConfig = {

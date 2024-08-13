@@ -86,16 +86,20 @@ function RequestParam(alias: string) {
  */
 function RequestMapping(prefix: string) {
     return function (target: any) {
+        let newPrefix: string = prefix;
+        if (newPrefix.endsWith('/')) {
+            newPrefix = newPrefix.slice(0, -1);
+        }
         // 设置目标类及其原型链上的所有基类的baseURL
         const setBaseURL = (prototype: any) => {
             if (prototype && prototype !== Object.prototype) {
-                prototype.base = prefix;
+                prototype.base = newPrefix;
                 setBaseURL(Object.getPrototypeOf(prototype));
             }
         };
         setBaseURL(target.prototype);
 
-        Reflect.defineMetadata('ProxyUrl', prefix, target);
+        Reflect.defineMetadata('ProxyUrl', newPrefix, target);
         return target;
     };
 }
